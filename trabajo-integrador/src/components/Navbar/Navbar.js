@@ -1,6 +1,9 @@
-import React from "react"
+import React from "react";
+
 function Navbar(){
     return(
+    <>      
+        <h1>UdeSA Movies</h1>
         <nav>
             <ul class="nav nav-tabs my-4">
                 <li class="nav-item">
@@ -23,6 +26,7 @@ function Navbar(){
                 </li>
             </ul>
         </nav>
+    </>
     )
 }
 

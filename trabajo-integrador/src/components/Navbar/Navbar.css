@@ -1,0 +1,17 @@
+nav {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: #444;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+.nav {
+    margin: 0 !important;
+}
+.nav-link {
+    color: #444;
+    text-decoration: none;
+}
+.nav-link:hover {
+    font-weight: bold;
+}
