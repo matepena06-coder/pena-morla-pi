@@ -1,5 +1,5 @@
 import React from "react"
-function Card(props){
+function CardsMoviesSeries(props){
     return(
         <article className={props.cardClass}>
             <img src={`https://image.tmdb.org/t/p/w342/${props.pelicula.poster_path}`} 
@@ -16,4 +16,4 @@ function Card(props){
     )
 }
 
-export default Card;
+export default CardsMoviesSeries;
