@@ -9,14 +9,16 @@ import Favorites from "./screens/Favorites/Favorites";
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import NotFound from "./screens/Not-found/Not-found";
+import Search from "./components/Search/Search";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="container">
         <Navbar />
+        <Search />
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact={true} path="/" component={Home} />
           <Route path="/movies" component={Movies} />
           <Route path="/series" component={Series} />
           <Route path="/favorites" component={Favorites} />
