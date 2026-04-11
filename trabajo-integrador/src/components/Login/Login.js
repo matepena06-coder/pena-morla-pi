@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import { withRouter } from "react-router-dom/cjs/react-router-dom";
 
 class Login extends Component{
 
@@ -22,35 +23,42 @@ class Login extends Component{
         event.preventDefault()
 
         if(
-            this.state.email ==="",
+            this.state.email ===""||
             this.state.password ===""
         ){
             this.setState({error: "Completar todos los campos"});
             return;
         }
 
-        let yaRegistrados = localStorage.getItem("usuarios")
-        let usuarios = localStorage.getItem("usuarios") === null ? []: JSON.parse(localStorage.getItem("usuarios"))
-        
-        
-        let usuarioCorrecto = usuarios.filter((usuario)=> 
-            usuario.email === this.state.email &&
-            usuario.password === this.state.password)
+        let usuariosRegistrados = localStorage.getItem("usuarios")
+        let usuarios = usuariosRegistrados ? JSON.parse(usuariosRegistrados): []
+
+        if (usuarios.length === 0){
+            this.setState({
+                error: "No hay usuarios registrados"
+            })
+            return
+        }
+
+        let usuarioEmail = usuarios.filter((usuario) => usuario.email === this.state.email)
+
+        if (usuarioEmail.length === 0){
+            this.setState({
+                error: "No existe un usuario con registrado con este email"
+            })
+            return
+        }
+
+        let usuarioCorrecto = usuarioEmail.filter((usuario)=> usuario.password === this.state.password)
 
         if (usuarioCorrecto.length === 0){
-            this.setState({
-                error: "Email o contraseña incorrectos"
-            })
+            this.setState({error: "El email y la contraseña no coinciden"});
             return
         }
 
         sessionStorage.setItem("usuarioLogueado", this.state.email)
 
-        this.setState({
-            email:"",
-            password:"",
-            error:""
-        })
+        this.props.history.push("/")
 
 }
 
@@ -73,4 +81,4 @@ class Login extends Component{
     }
 }
 
-export default Login
+export default withRouter(Login)

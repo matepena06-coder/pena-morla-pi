@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import { withRouter } from "react-router-dom/cjs/react-router-dom";
 
 class Register extends Component{
     constructor(props){
@@ -21,7 +22,7 @@ class Register extends Component{
         event.preventDefault()
 
         if(
-            this.state.email ==="",
+            this.state.email ==="" ||
             this.state.password ===""
         ){
             this.setState({error: "Completar todos los campos"});
@@ -59,7 +60,9 @@ class Register extends Component{
 
         localStorage.setItem("usuarios", JSON.stringify(usuariosNuevos))
         sessionStorage.setItem("usuarioLogueado", this.state.email)
-
+        
+        this.props.history.push("/login")
+        
         this.setState({
             email:"",
             password:"",
@@ -88,4 +91,4 @@ class Register extends Component{
     }
 }
 
-export default Register
+export default withRouter(Register)
