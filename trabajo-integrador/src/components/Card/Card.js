@@ -1,25 +1,33 @@
-import React, { useState } from "react"
+import React, { Component } from "react"
+import { Link } from "react-router-dom";
 import "./Card.css"
 
-function Card(props){
-    const [verDesc, setVerDesc] = useState(false)
+class Card extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            verDesc: false
+        }
+    }
 
-    return(
-        <article className={props.cardClass}>
-            <img src={`https://image.tmdb.org/t/p/w342/${props.pelicula.poster_path}`}
-            alt={props.pelicula.title || props.pelicula.name}
-            className="card-img-top"/>
-            <div className="cardBody">
-                <h5 className="card-title">{props.pelicula.title || props.pelicula.name}</h5>
-                {verDesc && <p className="card-text">{props.pelicula.overview}</p>}
-                <button className="btn-description" onClick={() => setVerDesc(!verDesc)}>
-                    {verDesc ? "Ocultar descripción" : "Ver descripción"}
-                </button>
-                <a href='' className="btn btn-primary">Ir a detalle</a>
-                <a href='' className="btn-description">Agregar a favoritos</a>
-            </div>
-        </article>
-    )
+    render() {
+        return (
+            <article className={this.props.cardClass}>
+                <img src={`https://image.tmdb.org/t/p/w342/${this.props.item.poster_path}`}
+                alt={this.props.item.title || this.props.item.name}
+                className="card-img-top"/>
+                <div className="cardBody">
+                    <h5 className="card-title">{this.props.item.title || this.props.item.name}</h5>
+                    {this.state.verDesc && <p className="card-text">{this.props.item.overview}</p>}
+                    <button className="btn-description" onClick={() => this.setState({ verDesc: !this.state.verDesc })}>
+                        {this.state.verDesc ? "Ocultar descripción" : "Ver descripción"}
+                    </button>
+                    <Link to={this.props.link} className="btn btn-primary">Ir a detalle</Link>
+                    <a href='' className="btn-description">Agregar a favoritos</a>
+                </div>
+            </article>
+        )
+    }
 }
 
 export default Card;

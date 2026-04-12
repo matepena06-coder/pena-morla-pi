@@ -9,6 +9,7 @@ import Favorites from "./screens/Favorites/Favorites";
 import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import NotFound from "./screens/Not-found/Not-found";
+import Detail from "./screens/Detail/Detail";
 import Search from "./components/Search/Search";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/favorites" component={Favorites} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/:type/:id" component={Detail} />
           <Route component={NotFound} />
         </Switch>
         <Footer />
