@@ -66,7 +66,8 @@ class SeccionSeries extends Component {
                         ))
                     }
                 </section>
-                <button onClick={() => this.verMasPopulares()}>Ver más</button>
+                <button classname='ver-mas' onClick={() => this.verMasPopulares()}>Ver más</button>
+
 
                 <h2 className="alert alert-primary">TV shows airing today</h2>
                 <section id="on-air-today" className="row cards">
@@ -80,7 +81,7 @@ class SeccionSeries extends Component {
                         ))
                     }
                 </section>
-                <button onClick={() => this.verMasNowAiring()}>Ver más</button>
+                <button className='ver-mas'onClick={() => this.verMasNowAiring()}>Ver más</button>
             </React.Fragment>
             : <Loader />
         )
