@@ -15,3 +15,13 @@ nav {
 .nav-link:hover {
     font-weight: bold;
 }
+
+.logo{
+  font-weight: bold;
+  color: rgb(34, 34, 154)
+}
+
+h1{
+  text-align: center;
+}
+

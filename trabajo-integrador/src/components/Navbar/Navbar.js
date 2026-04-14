@@ -5,7 +5,7 @@ import "./Navbar.css";
 function Navbar(){
     return(
     <>
-        <h1>UdeSA Movies</h1>
+        <h1 className="logo">PyM</h1>
         <nav>
             <ul className="nav nav-tabs my-4">
                 <li className="nav-item">

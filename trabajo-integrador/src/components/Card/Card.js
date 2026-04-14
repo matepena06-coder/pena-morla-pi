@@ -11,6 +11,25 @@ class Card extends Component {
         }
     }
 
+    agregarAFavoritos(){
+       let favoritos = []
+
+
+       let recuperarStorage = localStorage.getItem("favoritos")
+
+
+       if (recuperarStorage !== null){
+           favoritos= JSON.parse(recuperarStorage)
+       }
+       favoritos.push(this.props.item)
+
+
+       let favoritosString= JSON.stringify(favoritos)
+
+
+       localStorage.setItem("favoritos", favoritosString)
+   }
+
     render() {
         return (
             <article className={this.props.cardClass}>
@@ -25,7 +44,15 @@ class Card extends Component {
                     <button className="btn-description" onClick={() => this.setState({ verDesc: !this.state.verDesc })}>
                         {this.state.verDesc ? "Ocultar descripción" : "Ver descripción"}
                     </button>
-                    <a href='' className="btn-description">Agregar a favoritos</a>
+                    {this.props.botonesFavoritos?(
+                       <button onClick={()=>this.props.eliminarFavorito(this.props.item.id)}>
+                           Eliminar de favoritos
+                       </button>
+                   ):(
+                       <button onClick={()=>this.agregarAFavoritos()}>
+                           Agregar a favoritos
+                       </button>
+                   )}
                 </div>
             </article>
         )
