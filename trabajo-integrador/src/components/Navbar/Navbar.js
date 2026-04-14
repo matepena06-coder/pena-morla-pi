@@ -20,6 +20,8 @@ function Navbar(){
                 <li className="nav-item">
                     <Link className="nav-link" to="/favorites">Favoritas</Link>
                 </li>
+
+                {/* ternario con register y login, mostrar favoritos si esta logeado*/}
                 <li className="nav-item ml-auto">
                     <Link className="nav-link" to="/register">Registro</Link>
                 </li>

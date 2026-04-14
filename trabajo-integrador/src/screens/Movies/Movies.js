@@ -2,7 +2,9 @@ import SeccionMovies from "../../components/SeccionMovies/SeccionMovies"
 
 function Movies() {
     return (
-        <SeccionMovies />
+        <SeccionMovies 
+        ubicacion='moviesseries'
+        />
     )
 }
 

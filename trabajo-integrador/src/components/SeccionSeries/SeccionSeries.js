@@ -3,7 +3,10 @@ import Card from "../Card/Card"
 import "../Card/Card.css"
 import "./SeccionSeries.css"
 import Loader from "../../screens/Loader/Loader"
+import {Link} from "react-router-dom"
 
+
+// Esta pagina contiene las mismas funcionalidades que las peliculas, pero con las series
 class SeccionSeries extends Component {
     constructor(props) {
         super(props)
@@ -12,7 +15,8 @@ class SeccionSeries extends Component {
             datosNowAiring: [],
             paginaPopulares: 1,
             paginaNowAiring: 1,
-            contenidoCargado: false
+            contenidoCargado: false,
+            filtro: ""
         }
     }
 
@@ -53,10 +57,26 @@ class SeccionSeries extends Component {
     render() {
         return (
             this.state.contenidoCargado ?
+
             <React.Fragment>
+                {this.props.ubicacion === 'moviesseries' ?
+                    <input
+                        className='filtro-input'
+                        type="text"
+                        placeholder='Filtrar series...'
+                        value={this.state.filtro}
+                        onChange={e => this.setState({ filtro: e.target.value })}
+                    />
+                    : null
+                    }
+
                 <h2 className="alert alert-primary">Popular TV shows this week</h2>
+
                 <section className="row cards">
-                    {this.state.datosPopulares.map((item, idx) => (
+                    {this.state.datosPopulares
+                        .filter(item => item.name.toLowerCase().includes(this.state.filtro.toLowerCase()))
+                        .slice(0, this.props.ubicacion === 'home' ? 4 : 16)
+                        .map((item, idx) => (
                             <Card
                                 key={idx}
                                 item={item}
@@ -66,12 +86,19 @@ class SeccionSeries extends Component {
                         ))
                     }
                 </section>
-                <button classname='ver-mas' onClick={() => this.verMasPopulares()}>Ver más</button>
 
+                {this.props.ubicacion === 'home' ?
+                    <Link to='/series' className='cargar-todas'> Cargar todas </Link> :
+                    <button className='ver-mas' onClick={() => this.verMasPopulares()}> Ver más </button>
+                }
 
                 <h2 className="alert alert-primary">TV shows airing today</h2>
+
                 <section id="on-air-today" className="row cards">
-                    {this.state.datosNowAiring.map((item, idx) => (
+                    {this.state.datosNowAiring
+                        .filter(item => item.name.toLowerCase().includes(this.state.filtro.toLowerCase()))
+                        .slice(0, this.props.ubicacion === 'home' ? 4 : 16)
+                        .map((item, idx) => (
                             <Card
                                 key={idx}
                                 item={item}
@@ -81,8 +108,13 @@ class SeccionSeries extends Component {
                         ))
                     }
                 </section>
-                <button className='ver-mas'onClick={() => this.verMasNowAiring()}>Ver más</button>
+
+                {this.props.ubicacion === 'home' ?
+                    <Link to='/series' className='cargar-todas'> Cargar todas </Link> :
+                    <button className='ver-mas' onClick={() => this.verMasNowAiring()}>Ver más</button>
+                }
             </React.Fragment>
+
             : <Loader />
         )
     }

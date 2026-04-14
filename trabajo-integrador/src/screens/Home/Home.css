@@ -1,3 +1,25 @@
+.cargar-todas {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    display: inline-block;
+    margin: 0 0 4vh 0;
+}
+
 .ver-mas {
-    display: none;
+    background-color: #ffee00;
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-top: 20px;
+    display: inline-block;
+    margin: 0 0 4vh 0;
 }

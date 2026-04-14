@@ -11,6 +11,7 @@ import Register from "./screens/Register/Register";
 import NotFound from "./screens/Not-found/Not-found";
 import Detail from "./screens/Detail/Detail";
 import Search from "./components/Search/Search";
+import SeccionResults from "./components/SeccionResults/SeccionResults";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/favorites" component={Favorites} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/search/:tipo/:query" component={SeccionResults} />
           <Route path="/:type/:id" component={Detail} />
           <Route component={NotFound} />
         </Switch>
