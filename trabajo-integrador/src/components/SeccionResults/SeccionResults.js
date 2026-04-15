@@ -19,9 +19,8 @@ class SeccionResults extends Component {
 
     // Traigo los resultados de la busqueda realizada por el usuario
 
-    //Utilizo una funcion para utilizarla en DidMount y DidUpdate, para evitar repetir codigo.
-    fetchResultados() {
-        this.setState({ contenidoCargado: false })
+
+    componentDidMount() {
         fetch(`https://api.themoviedb.org/3/search/${this.props.match.params.tipo}?api_key=d452059a88c91458f5fb658b7db8e011&query=${this.props.match.params.query}`)
             .then(response => response.json())
             .then(data => this.setState({
@@ -29,21 +28,6 @@ class SeccionResults extends Component {
                 contenidoCargado: true
             }))
             .catch(error => console.log(error))
-    }
-
-    componentDidMount() {
-        this.fetchResultados()
-    }
-
-    // Si el usuario realiza la misma busqueda, no hago el fetch
-    // Si el usuario realiza una busqueda diferente, puedo hacer el fetch debido a que es DidMount
-    componentDidUpdate(queryAnterior) {
-        if (
-            queryAnterior.match.params.query !== this.props.match.params.query ||
-            queryAnterior.match.params.tipo !== this.props.match.params.tipo
-        ) {
-            this.fetchResultados()
-        }
     }
 
     render() {

@@ -51,3 +51,7 @@
     background-color: white;
     margin: 4vh 0;
 }
+
+.btn btn-primary {
+    margin-bottom: 2vh;
+}

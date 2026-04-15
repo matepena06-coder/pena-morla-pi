@@ -10,7 +10,6 @@ import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import NotFound from "./screens/Not-found/Not-found";
 import Detail from "./screens/Detail/Detail";
-import Search from "./components/Search/Search";
 import SeccionResults from "./components/SeccionResults/SeccionResults";
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
     <BrowserRouter>
       <div className="container">
         <Navbar />
-        <Search />
         <Switch>
           <Route exact={true} path="/" component={Home} />
           <Route path="/movies" component={Movies} />

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 import "./Card.css"
 
 // Componente reutilizable para mostrar películas o series en formato de tarjeta
@@ -11,24 +11,12 @@ class Card extends Component {
         }
     }
 
-    agregarAFavoritos(){
-       let favoritos = []
-
-
-       let recuperarStorage = localStorage.getItem("favoritos")
-
-
-       if (recuperarStorage !== null){
-           favoritos= JSON.parse(recuperarStorage)
-       }
-       favoritos.push(this.props.item)
-
-
-       let favoritosString= JSON.stringify(favoritos)
-
-
-       localStorage.setItem("favoritos", favoritosString)
-   }
+    agregarAFavoritos() {
+        const recuperarStorage = localStorage.getItem("favoritos")
+        const favoritos = recuperarStorage !== null ? JSON.parse(recuperarStorage) : []
+        favoritos.push(this.props.item)
+        localStorage.setItem("favoritos", JSON.stringify(favoritos))
+    }
 
     render() {
         return (
@@ -44,6 +32,9 @@ class Card extends Component {
                     <button className="btn-description" onClick={() => this.setState({ verDesc: !this.state.verDesc })}>
                         {this.state.verDesc ? "Ocultar descripción" : "Ver descripción"}
                     </button>
+                    <Link to={this.props.link} className="btn btn-primary">
+                        Ver detalle
+                    </Link>
                     {this.props.botonesFavoritos?(
                        <button onClick={()=>this.props.eliminarFavorito(this.props.item.id)}>
                            Eliminar de favoritos

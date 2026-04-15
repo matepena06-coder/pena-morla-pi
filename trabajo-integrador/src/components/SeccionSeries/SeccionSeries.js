@@ -33,23 +33,21 @@ class SeccionSeries extends Component {
     }
 
     verMasPopulares() {
-        const nuevaPagina = this.state.paginaPopulares + 1
-        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=d452059a88c91458f5fb658b7db8e011&page=${nuevaPagina}`)
+        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=d452059a88c91458f5fb658b7db8e011&page=${this.state.paginaPopulares + 1}`)
             .then(response => response.json())
             .then(data => this.setState({
                 datosPopulares: this.state.datosPopulares.concat(data.results),
-                paginaPopulares: nuevaPagina
+                paginaPopulares: this.state.paginaPopulares + 1
             }))
             .catch(error => console.log(error))
     }
 
     verMasNowAiring() {
-        const nuevaPagina = this.state.paginaNowAiring + 1
-        fetch(`https://api.themoviedb.org/3/tv/on_the_air?api_key=d452059a88c91458f5fb658b7db8e011&page=${nuevaPagina}`)
+        fetch(`https://api.themoviedb.org/3/tv/on_the_air?api_key=d452059a88c91458f5fb658b7db8e011&page=${this.state.paginaNowAiring + 1}`)
             .then(response => response.json())
             .then(data => this.setState({
                 datosNowAiring: this.state.datosNowAiring.concat(data.results),
-                paginaNowAiring: nuevaPagina
+                paginaNowAiring: this.state.paginaNowAiring + 1
             }))
             .catch(error => console.log(error))
     }
@@ -75,7 +73,7 @@ class SeccionSeries extends Component {
                 <section className="row cards">
                     {this.state.datosPopulares
                         .filter(item => item.name.toLowerCase().includes(this.state.filtro.toLowerCase()))
-                        .slice(0, this.props.ubicacion === 'home' ? 4 : 16)
+                        .slice(0, this.props.ubicacion === 'home' ? 4 : 1000)
                         .map((item, idx) => (
                             <Card
                                 key={idx}
@@ -97,7 +95,7 @@ class SeccionSeries extends Component {
                 <section id="on-air-today" className="row cards">
                     {this.state.datosNowAiring
                         .filter(item => item.name.toLowerCase().includes(this.state.filtro.toLowerCase()))
-                        .slice(0, this.props.ubicacion === 'home' ? 4 : 16)
+                        .slice(0, this.props.ubicacion === 'home' ? 4 : 1000)
                         .map((item, idx) => (
                             <Card
                                 key={idx}

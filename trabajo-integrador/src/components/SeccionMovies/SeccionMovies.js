@@ -81,7 +81,7 @@ class SeccionMovies extends Component {
                     {this.state.datosPopulares
                     /* filtro por título, muestro las peliculas solicitadas, tambien si estoy en home hago slice (estetica)  */
                         .filter(item => item.title.toLowerCase().includes(this.state.filtro.toLowerCase()))
-                        .slice(0, this.props.ubicacion === 'home' ? 4 : 16)
+                        .slice(0, this.props.ubicacion === 'home' ? 4 : 1000)
                         .map((item, idx) => (
                             <Card
                             // Mando la informacion a la card, como props, para que se muestre la imagen, el título, la descripción y habilite la pagina detalle 
@@ -105,7 +105,7 @@ class SeccionMovies extends Component {
                 <section id="now-playing" className="row cards">
                     {this.state.datosNowPlaying
                         .filter(item => item.title.toLowerCase().includes(this.state.filtro.toLowerCase()))
-                        .slice(0, this.props.ubicacion === 'home' ? 4 : 16)
+                        .slice(0, this.props.ubicacion === 'home' ? 4 : 1000)
                         .map((item, idx) => (
                             <Card
                                 key={idx}
