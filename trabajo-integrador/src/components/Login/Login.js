@@ -1,5 +1,8 @@
 import React,{Component} from "react";
 import { withRouter } from "react-router-dom/cjs/react-router-dom";
+import Cookies from "universal-cookie"
+
+const cookies = new Cookies()
 
 class Login extends Component{
 
@@ -52,11 +55,11 @@ class Login extends Component{
         let usuarioCorrecto = usuarioEmail.filter((usuario)=> usuario.password === this.state.password)
 
         if (usuarioCorrecto.length === 0){
-            this.setState({error: "El email y la contraseña no coinciden"});
+            this.setState({error: "Credenciales incorrectas"});
             return
         }
 
-        sessionStorage.setItem("usuarioLogueado", this.state.email)
+        cookies.set("usuarioLogueado", this.state.email)
 
         this.props.history.push("/")
 

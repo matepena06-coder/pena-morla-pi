@@ -1,10 +1,15 @@
 import SeccionMovies from "../../components/SeccionMovies/SeccionMovies"
+import Navbar from "../../components/Navbar/Navbar"
+import Footer from "../../components/Footer/Footer"
+import "./Movies.css"
 
 function Movies() {
     return (
-        <SeccionMovies 
-        ubicacion='moviesseries'
-        />
+        <section>
+            <Navbar/>
+            <SeccionMovies ubicacion='moviesseries'/>
+            <Footer/>
+        </section>
     )
 }
 

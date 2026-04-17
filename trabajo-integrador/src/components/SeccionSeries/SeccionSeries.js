@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import Card from "../Card/Card"
 import "../Card/Card.css"
 import "./SeccionSeries.css"
-import Loader from "../../screens/Loader/Loader"
+import Loader from "../Loader/Loader"
 import {Link} from "react-router-dom"
 
 

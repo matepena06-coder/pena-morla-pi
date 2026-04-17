@@ -2,7 +2,7 @@ import { Component } from "react"
 import { withRouter } from "react-router-dom"
 import Card from "../Card/Card"
 import NotFoundMessage from "../NotFoundMessage/NotFoundMessage"
-import Loader from "../../screens/Loader/Loader"
+import Loader from "../Loader/Loader"
 import "../Card/Card.css"
 import "./SeccionResults.css"
 

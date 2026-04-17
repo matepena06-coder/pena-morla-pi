@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import "./Detail.css"
-import Loader from "../Loader/Loader"
+import Loader from "../../components/Loader/Loader"
+import Navbar from "../../components/Navbar/Navbar"
+import Footer from "../../components/Footer/Footer"
 
 class Detail extends Component {
     constructor(props) {
@@ -20,6 +22,8 @@ class Detail extends Component {
 
     render() {
         return (
+            <>
+            <Navbar/>
             this.state.contenidoCargado ?
             <div className="detail">
                 <img
@@ -37,6 +41,8 @@ class Detail extends Component {
                 </div>
             </div>
             : <Loader />
+            <Footer/>
+            </>
         )
     }
 }

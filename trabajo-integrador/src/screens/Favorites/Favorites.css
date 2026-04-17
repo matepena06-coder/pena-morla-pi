@@ -2,3 +2,12 @@
    width: 23%;
    margin: 0,5%
 }
+
+.logo{
+  font-weight: bold;
+  color: rgb(34, 34, 154)
+}
+
+h1{
+  text-align: center;
+}

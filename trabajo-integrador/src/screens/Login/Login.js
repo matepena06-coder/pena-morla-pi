@@ -1,8 +1,15 @@
 import Login from "../../components/Login/Login"
+import Navbar from "../../components/Navbar/Navbar"
+import Footer from "../../components/Footer/Footer"
+import "./Login.css"
 
 function LoginS(){
     return(
-        <Login/>
+        <section>
+            <Navbar/>
+            <Login/>
+            <Footer/>
+        </section>
     )
 }
 

@@ -4,3 +4,12 @@
     margin-top: 2rem;
     color: #666;
 }
+
+.logo{
+  font-weight: bold;
+  color: rgb(34, 34, 154)
+}
+
+h1{
+  text-align: center;
+}
