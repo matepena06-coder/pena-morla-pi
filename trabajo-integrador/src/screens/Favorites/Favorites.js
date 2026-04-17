@@ -20,25 +20,15 @@ class Favorites extends Component{
 
    componentDidMount(){
 
-
-      
-      
        let storage = localStorage.getItem("favoritos")
-
-
-
 
        let favoritosGuardados = storage ? JSON.parse(storage) : []
     
-
-
        this.setState({
            favoritos: favoritosGuardados
        })
 
-
    }
-
 
    eliminarFavorito(id){
        let storage = localStorage.getItem("favoritos")
@@ -57,10 +47,6 @@ class Favorites extends Component{
   
        }
   
-
-
-
-
    render(){
        let peliculasFavoritas =this.state.favoritos.filter(item=> item.title)
        let seriesFavoritas =this.state.favoritos.filter(item=> item.name)
@@ -97,8 +83,6 @@ class Favorites extends Component{
            </React.Fragment>
        )
    }
-
-
 }
 
 
