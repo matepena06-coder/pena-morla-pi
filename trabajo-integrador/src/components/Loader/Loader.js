@@ -1,4 +1,4 @@
-import "./Loader.css"
+import "./styles.css"
 import Navbar from "../Navbar/Navbar"
 import Footer from "../Footer/Footer"
 

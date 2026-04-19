@@ -1,7 +1,7 @@
 import Cookies from "universal-cookie"
 import Card from "../../components/Card/Card"
 import React, {Component} from "react"
-import "./Favorites.css"
+import "./styles.css"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
 

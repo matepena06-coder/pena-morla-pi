@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "./Detail.css"
+import "./styles.css"
 import Loader from "../../components/Loader/Loader"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
@@ -24,7 +24,7 @@ class Detail extends Component {
         return (
             <>
             <Navbar/>
-            this.state.contenidoCargado ?
+            {this.state.contenidoCargado ? (
             <div className="detail">
                 <img
                     src={`https://image.tmdb.org/t/p/w342/${this.state.dato.poster_path}`}
@@ -40,7 +40,9 @@ class Detail extends Component {
                     <a href="">Agregar a favoritos</a>
                 </div>
             </div>
+            )
             : <Loader />
+            }
             <Footer/>
             </>
         )

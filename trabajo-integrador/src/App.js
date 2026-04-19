@@ -10,13 +10,13 @@ import Login from "./screens/Login/Login";
 import Register from "./screens/Register/Register";
 import NotFound from "./screens/Not-found/Not-found";
 import Detail from "./screens/Detail/Detail";
-import SeccionResults from "./components/SeccionResults/SeccionResults";
+import Results from "./screens/Results/Results";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="container">
-        
+
         <Switch>
           <Route exact={true} path="/" component={Home} />
           <Route path="/movies" component={Movies} />
@@ -24,7 +24,7 @@ function App() {
           <Route path="/favorites" component={Favorites} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/search/:tipo/:query" component={SeccionResults} />
+          <Route path="/search/:tipo/:query" component={Results} />
           <Route path="/:type/:id" component={Detail} />
           <Route component={NotFound} />
         </Switch>

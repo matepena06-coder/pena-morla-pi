@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom"
 import Card from "../Card/Card"
 import NotFoundMessage from "../NotFoundMessage/NotFoundMessage"
 import Loader from "../Loader/Loader"
-import "../Card/Card.css"
-import "./SeccionResults.css"
+import "../Card/styles.css"
+import "./styles.css"
 
 // Ultimo componente del flujo de search.
 

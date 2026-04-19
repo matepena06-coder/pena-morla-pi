@@ -2,7 +2,7 @@ import React from "react"
 import SeccionResults from "../../components/SeccionResults/SeccionResults"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
-import "./Results.css"
+import "./styles.css"
 
 function Results(props) {
     const query = props.match.params.query
@@ -10,9 +10,9 @@ function Results(props) {
 
     return (
         <section>
-            <Navbar/>
+            <Navbar />
             <SeccionResults query={query} tipo={tipo} />
-            <Footer/>
+            <Footer />
         </section>
     )
 }

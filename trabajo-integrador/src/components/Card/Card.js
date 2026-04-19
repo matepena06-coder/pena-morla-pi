@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
-import "./Card.css"
+import "./styles.css"
 
 // Componente reutilizable para mostrar películas o series en formato de tarjeta
 class Card extends Component {

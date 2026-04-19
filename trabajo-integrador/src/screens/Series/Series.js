@@ -1,7 +1,7 @@
 import SeccionSeries from "../../components/SeccionSeries/SeccionSeries"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
-import "./Series.css"
+import "./styles.css"
 
 function Series() {
     return (

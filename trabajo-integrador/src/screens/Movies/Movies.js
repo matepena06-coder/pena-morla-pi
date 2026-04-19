@@ -1,7 +1,7 @@
 import SeccionMovies from "../../components/SeccionMovies/SeccionMovies"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
-import "./Movies.css"
+import "./styles.css"
 
 function Movies() {
     return (
