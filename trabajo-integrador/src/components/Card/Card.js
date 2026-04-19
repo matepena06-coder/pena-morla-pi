@@ -64,7 +64,7 @@ class Card extends Component {
                    <button className="btn-description" onClick={() => this.setState({ verDesc: !this.state.verDesc })}>
                        {this.state.verDesc ? "Ocultar descripción" : "Ver descripción"}
                    </button>
-                   <Link to={this.props.link} className="btn btn-primary">
+                   <Link to={this.props.link} className="boton-detalle">
                        Ver detalle
                    </Link>
                    {this.props.botonesFavoritos?(

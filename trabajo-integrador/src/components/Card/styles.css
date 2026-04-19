@@ -52,6 +52,14 @@
     margin: 4vh 0;
 }
 
-.btn btn-primary {
-    margin-bottom: 2vh;
+.boton-detalle {
+    font-size: 1.5vw;
+    background-color: #f3ce13;
+    margin: 4vh 0;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    border-color: black;
+    border-radius: 20px;
+
 }

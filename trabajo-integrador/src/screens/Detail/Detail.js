@@ -34,7 +34,7 @@ class Detail extends Component {
                     <h2>{this.state.dato.title || this.state.dato.name}</h2>
                     <p> <strong>Calificación:</strong> {this.state.dato.vote_average}</p>
                     <p> <strong>Fecha de estreno:</strong> {this.state.dato.release_date || this.state.dato.first_air_date}</p>
-                    {this.props.match.params.type === "movie" && <p> <strong>Duración:</strong> {this.state.dato.runtime} min</p>}
+                    {this.props.match.params.type === "movie" ? <p> <strong>Duración:</strong> {this.state.dato.runtime} min</p> : null}
                     <p><strong> Sinopsis: </strong> {this.state.dato.overview}</p>
                     <p> <strong>Géneros:</strong> {this.state.dato.genres.map((genres, idx) => <span key={idx}>{genres.name} </span>)}</p>
                     <a href="">Agregar a favoritos</a>
