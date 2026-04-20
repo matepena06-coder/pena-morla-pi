@@ -13,14 +13,18 @@ class Detail extends Component {
         this.state = {
             dato: { genres: [] },
             contenidoCargado: false,
-            esFavorito: this.estáEnFavoritos
+            esFavorito: false
         }
     }
 
     componentDidMount() {
         fetch(`https://api.themoviedb.org/3/${this.props.match.params.type}/${this.props.match.params.id}?api_key=d452059a88c91458f5fb658b7db8e011`)
             .then(response => response.json())
-            .then(data => this.setState({ dato: data, contenidoCargado: true }))
+            .then(data => this.setState({ 
+                dato: data, 
+                contenidoCargado: true,
+                esFavorito: this.estáEnFavoritos(data.id)
+             }))
             .catch(error => console.log(error))
     }
 
@@ -48,10 +52,10 @@ class Detail extends Component {
    }
 
 
-   estáEnFavoritos(){
+   estáEnFavoritos(id){
        let storage = localStorage.getItem("favoritos")
        let favoritos = storage ? JSON.parse(storage) : []
-       let resultado = favoritos.filter(item=> item.id === this.state.dato.id)
+       let resultado = favoritos.filter(item=> item.id === id)
        return resultado.length > 0
        // Si resultado devuelve un array con un item o más, el return es true, si no es false
    }
