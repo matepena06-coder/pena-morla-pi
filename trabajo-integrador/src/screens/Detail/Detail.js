@@ -3,13 +3,17 @@ import "./styles.css"
 import Loader from "../../components/Loader/Loader"
 import Navbar from "../../components/Navbar/Navbar"
 import Footer from "../../components/Footer/Footer"
+import Cookies from "universal-cookie"
+
+const cookies =new Cookies()
 
 class Detail extends Component {
     constructor(props) {
         super(props)
         this.state = {
             dato: { genres: [] },
-            contenidoCargado: false
+            contenidoCargado: false,
+            esFavorito: false
         }
     }
 
@@ -20,7 +24,40 @@ class Detail extends Component {
             .catch(error => console.log(error))
     }
 
+    agregarAFavoritos() {
+       let storage = localStorage.getItem("favoritos")
+       let favoritos = storage ? JSON.parse(storage) : []
+       favoritos.push(this.state.dato)
+       localStorage.setItem("favoritos", JSON.stringify(favoritos))
+       this.setState({
+           esFavorito: true
+           // Esto sirve para cambiar el renderizado cambie al instante el botón de agregar a eliminar
+       })
+   }
+
+
+   eliminarDeFavoritos(){
+       let storage = localStorage.getItem("favoritos")
+       let favoritos = storage ? JSON.parse(storage) : []
+       let nuevosFavoritos = favoritos.filter(item=> item.id !== this.state.dato.id)
+       localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos))
+       this.setState({
+           esFavorito: false
+       })
+      
+   }
+
+
+   estáEnFavoritos(){
+       let storage = localStorage.getItem("favoritos")
+       let favoritos = storage ? JSON.parse(storage) : []
+       let resultado = favoritos.filter(item=> item.id === this.state.dato.id)
+       return resultado.length > 0
+       // Si resultado devuelve un array con un item o más, el return es true, si no es false
+   }
+
     render() {
+        let usuario = cookies.get("usuarioLogueado")
         return (
             <>
             <Navbar/>
@@ -37,7 +74,16 @@ class Detail extends Component {
                     {this.props.match.params.type === "movie" ? <p> <strong>Duración:</strong> {this.state.dato.runtime} min</p> : null}
                     <p><strong> Sinopsis: </strong> {this.state.dato.overview}</p>
                     <p> <strong>Géneros:</strong> {this.state.dato.genres.map((genres, idx) => <span key={idx}>{genres.name} </span>)}</p>
-                    <a href="">Agregar a favoritos</a>
+                    {usuario?(
+                        this.state.esFavorito?(
+                        <button onClick={()=>this.eliminarDeFavoritos()}>
+                            Eliminar de favoritos
+                        </button>
+                    ):(<button onClick={()=>this.agregarAFavoritos()}>
+                          Agregar a favoritos
+                        </button>
+                    )
+                    ):null}
                 </div>
             </div>
             )

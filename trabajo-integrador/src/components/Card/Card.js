@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import "./styles.css"
+import Cookies from "universal-cookie"
 
+const cookies =new Cookies()
 
 // Componente reutilizable para mostrar películas o series en formato de tarjeta
 class Card extends Component {
@@ -50,7 +52,8 @@ class Card extends Component {
 
 
    render() {
-      
+    let usuario = cookies.get("usuarioLogueado")
+
        return (
            <article className={this.props.cardClass}>
                <img src={`https://image.tmdb.org/t/p/w342/${this.props.item.poster_path}`}
@@ -72,14 +75,14 @@ class Card extends Component {
                           Eliminar de favoritos
                       </button>
                       // Este botón aparece solo en favoritos, ya que "botonesFavoritos" solo es true en la screen de favoritos
-                  ): this.state.esFavorito?(
+                  ): (usuario?(this.state.esFavorito?(
                       <button onClick={()=>this.eliminarDeFavoritos()}>
                           Eliminar de favoritos
                       </button>
                   ):(<button onClick={()=>this.agregarAFavoritos()}>
                           Agregar a favoritos
                       </button>
-                   )}
+                   )):null)}
                </div>
            </article>
        )
