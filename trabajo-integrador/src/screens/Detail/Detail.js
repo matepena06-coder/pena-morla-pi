@@ -13,7 +13,7 @@ class Detail extends Component {
         this.state = {
             dato: { genres: [] },
             contenidoCargado: false,
-            esFavorito: false
+            esFavorito: this.estáEnFavoritos
         }
     }
 

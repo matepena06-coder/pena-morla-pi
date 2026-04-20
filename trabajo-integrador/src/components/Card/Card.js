@@ -43,7 +43,8 @@ class Card extends Component {
    estáEnFavoritos(){
        let storage = localStorage.getItem("favoritos")
        let favoritos = storage ? JSON.parse(storage) : []
-       let resultado = favoritos.filter(item=> item.id === this.props.item.id)
+       let resultado = favoritos.filter(item=> item && item.id === this.props.item.id)
+       // el item && lo agregué para evitar que cuando item = null tire error item.id
        return resultado.length > 0
        // Si resultado devuelve un array con un item o más, el return es true, si no es false
    }
