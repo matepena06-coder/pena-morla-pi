@@ -1,87 +1,84 @@
-import React, { Component } from "react";
+import React, {useState, useEffect} from "react";
 import Card from "../Card/Card";
 import "../Card/styles.css";
 import "./styles.css";
 import Loader from "../Loader/Loader";
 import {Link} from "react-router-dom";
 
-class SeccionMovies extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            datosPopulares: [],
-            datosNowPlaying: [],
-            paginaPopulares: 1,
-            paginaNowPlaying: 1,
-            contenidoCargado: false,
-            filtro: ""
-        }
-    }
+function SeccionMovies(props){
+   const [datosPopulares, setDatosPopulares]= useState([])
+   const [datosNowPlaying, setDatosNowPlaying]= useState ([])
+   const [paginaPopulares, setPaginaPopulares]= useState (1)
+   const [paginaNowPlaying, setPaginaNowPlaying]= useState (1)
+   const [contenidoCargado, setContenidoCargado]= useState (false)
+   const [filtro, setFiltro]= useState ("")
 
     // ComponentDidMount, etapa inicial del ciclo de vida, la uso para cargar las películas
 
-    componentDidMount() {
+    useEffect(() => {
         fetch("https://api.themoviedb.org/3/movie/popular?api_key=d452059a88c91458f5fb658b7db8e011")
             .then(response => response.json())
-            .then(data => this.setState({ 
-                datosPopulares: data.results, 
-                contenidoCargado: true 
-            }))
+            .then(data => setDatosPopulares( 
+                data.results),
+                setContenidoCargado( 
+                true) 
+            )
             .catch(error => console.log(error))
 
         fetch("https://api.themoviedb.org/3/movie/now_playing?api_key=d452059a88c91458f5fb658b7db8e011")
             .then(response => response.json())
-            .then(data => this.setState({ 
-                datosNowPlaying: data.results 
-            }))
+            .then(data => setDatosNowPlaying( 
+                data.results 
+            ))
             .catch(error => console.log(error))
-    }
+    }, [])
 
     // Traigo los datos de las siguientes paginas, concatenando los arrays para no perder los datos anteriores
 
-    verMasPopulares() {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=d452059a88c91458f5fb658b7db8e011&page=${this.state.paginaPopulares + 1}`)
+    function verMasPopulares() {
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=d452059a88c91458f5fb658b7db8e011&page=${paginaPopulares + 1}`)
             .then(response => response.json())
-            .then(data => this.setState({
-                datosPopulares: this.state.datosPopulares.concat(data.results),
-                paginaPopulares: this.state.paginaPopulares + 1
-            }))
+            .then(data => setDatosPopulares(
+                datosPopulares.concat(data.results)),
+                setPaginaPopulares(
+                paginaPopulares + 1)
+            )
             .catch(error => console.log(error))
     }
 
-    verMasNowPlaying() {
-        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=d452059a88c91458f5fb658b7db8e011&page=${this.state.paginaNowPlaying + 1}`)
+    function verMasNowPlaying() {
+        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=d452059a88c91458f5fb658b7db8e011&page=${paginaNowPlaying + 1}`)
             .then(response => response.json())
-            .then(data => this.setState({
-                datosNowPlaying: this.state.datosNowPlaying.concat(data.results),
-                paginaNowPlaying: this.state.paginaNowPlaying + 1
-            }))
+            .then(data => setDatosNowPlaying(
+                datosNowPlaying.concat(data.results)),
+                setPaginaNowPlaying(
+                paginaNowPlaying + 1)
+            )
             .catch(error => console.log(error))
     }
 
-    render() {
         return (
         // Si el contenido no se ha cargado, muestro un loader. 
-            this.state.contenidoCargado ?
+            contenidoCargado ?
             <React.Fragment>
-                {this.props.ubicacion === 'moviesseries' ?
+                {props.ubicacion === 'moviesseries' ?
                 /* si la sección es la de movies/series, muestro un input para filtrar por título.  */
                     <input
                         className="filtro-input"
                         type="text"
                         placeholder="Filtrar películas..."
-                        value={this.state.filtro}
-                        onChange={e => this.setState({ filtro: e.target.value })}
+                        value={filtro}
+                        onChange={e => setFiltro(e.target.value )}
                     />
                 : null}
                 
 
                 <h2 className="alert alert-primary">Popular Movies this week</h2>
                 <section className="row cards">
-                    {this.state.datosPopulares
+                    {datosPopulares
                     /* filtro por título, muestro las peliculas solicitadas, tambien si estoy en home hago slice (estetica)  */
-                        .filter(item => item.title.toLowerCase().includes(this.state.filtro.toLowerCase()))
-                        .slice(0, this.props.ubicacion === 'home' ? 4 : 1000)
+                        .filter(item => item.title.toLowerCase().includes(filtro.toLowerCase()))
+                        .slice(0, props.ubicacion === 'home' ? 4 : 1000)
                         .map((item, idx) => (
                             <Card
                             // Mando la informacion a la card, como props, para que se muestre la imagen, el título, la descripción y habilite la pagina detalle 
@@ -95,17 +92,17 @@ class SeccionMovies extends Component {
                 </section>
 
                 {/* Si estoy en home, muestro el link para ir a la screen Movies, sino muestro un boton para fetchear mas peliculas.  */}
-                {this.props.ubicacion === 'home' ?
+                {props.ubicacion === 'home' ?
                     <Link to='/movies' className='cargar-todas'> Cargar todas </Link> :
-                    <button className='ver-mas' onClick={() => this.verMasPopulares()}>Ver más</button>
+                    <button className='ver-mas' onClick={() => verMasPopulares()}>Ver más</button>
                 }
 
                 {/* idem */}
                 <h2 className="alert alert-primary">Movies now Playing</h2>
                 <section id="now-playing" className="row cards">
-                    {this.state.datosNowPlaying
-                        .filter(item => item.title.toLowerCase().includes(this.state.filtro.toLowerCase()))
-                        .slice(0, this.props.ubicacion === 'home' ? 4 : 1000)
+                    {datosNowPlaying
+                        .filter(item => item.title.toLowerCase().includes(filtro.toLowerCase()))
+                        .slice(0, props.ubicacion === 'home' ? 4 : 1000)
                         .map((item, idx) => (
                             <Card
                                 key={idx}
@@ -116,14 +113,14 @@ class SeccionMovies extends Component {
                         ))
                     }
                 </section>
-                {this.props.ubicacion === 'home' ?
+                {props.ubicacion === 'home' ?
                     <Link to='/movies' className='cargar-todas'> Cargar todas </Link> :
-                    <button className='ver-mas' onClick={() => this.verMasNowPlaying()}>Ver más</button>
+                    <button className='ver-mas' onClick={() => verMasNowPlaying()}>Ver más</button>
                 }
             </React.Fragment>
             : <Loader />
         )
     }
-}
+
 
 export default SeccionMovies;

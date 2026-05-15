@@ -1,43 +1,26 @@
-import React,{Component} from "react";
+import React,{useState} from "react";
 import { withRouter } from "react-router-dom/cjs/react-router-dom";
 import Cookies from "universal-cookie"
 
 
 const cookies = new Cookies()
 
+function Login (props){
+   const [email, setEmail]= useState("")
+   const [password, setPassword]= useState ("")
+   const [error, setError]= useState ("")
 
-class Login extends Component{
-
-
-   constructor(props){
-       super(props)
-       this.state ={
-           email:"",
-           password:"",
-           error:""
-       }
-   }
- 
-   controlarCambios(event){
-       this.setState({
-           [event.target.name]: event.target.value
-           //Si el name del input es email, lo que escribe el usuario se guarda en this.state.email
-           //Si es password se guarda en this.state.password
-       })
-   }
-
-
-   login(event){
+   function login (event){
 
 
        event.preventDefault()
 
 
        if(
-           this.state.email ===""||
-           this.state.password ===""
+           email ===""||
+           password ===""
        ){
-           this.setState({error: "Completar todos los campos"});
+           setError("Completar todos los campos");
            return;
        }
 
@@ -47,65 +30,62 @@ class Login extends Component{
 
 
        if (usuarios.length === 0){
-           this.setState({
-               error: "No hay usuarios registrados"
-           })
+           setError(
+               "No hay usuarios registrados"
+           )
            return
        }
 
 
-       let usuarioEmail = usuarios.filter((usuario) => usuario.email === this.state.email)
+       let usuarioEmail = usuarios.filter((usuario) => usuario.email === email)
 
 
        if (usuarioEmail.length === 0){
-           this.setState({
-               error: "No existe un usuario con registrado con este email"
-           })
+           setError(
+               "No existe un usuario con registrado con este email"
+           )
            return
        }
 
 
-       let usuarioCorrecto = usuarioEmail.filter((usuario)=> usuario.password === this.state.password)
+       let usuarioCorrecto = usuarioEmail.filter((usuario)=> usuario.password === password)
 
 
        if (usuarioCorrecto.length === 0){
-           this.setState({error: "Credenciales incorrectas"});
+           setError("Credenciales incorrectas");
            return
        }
 
 
-       cookies.set("usuarioLogueado", this.state.email)
+       cookies.set("usuarioLogueado", email)
 
 
-       this.props.history.push("/")
+       props.history.push("/")
 
 
 }
-   render(){
 
-
-       return(
-
+return(
 
            <section>
 
 
-           <form onSubmit={(event)=>this.login(event)}>
+           <form onSubmit={(event)=>login(event)}>
                <label>Email:</label>
-               <input type="email" name="email" onChange={(event)=>this.controlarCambios(event)} value={this.state.email}></input>
+               <input type="email" name="email" onChange={(event)=>setEmail(event.target.value)} value={email}></input>
                <label>Password</label>
-               <input type="password" name="password" onChange={(event)=>this.controlarCambios(event)} value={this.state.password}></input>
+               <input type="password" name="password" onChange={(event)=>setPassword(event.target.value)} value={password}></input>
                <button type="submit">Log in</button>
            </form>
 
 
-           {this.state.error !== ""? <p>{this.state.error}</p>:""}
+           {error !== ""? <p>{error}</p>:""}
 
 
            </section>
        )
    }
-}
+
 
 
 export default withRouter(Login)
